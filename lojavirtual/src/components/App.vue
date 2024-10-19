@@ -1,16 +1,19 @@
 <template>
-  <PaginaPrincipal />
+  <router-view /> 
 </template>
 
 <script>
-import PaginaPrincipal from './components/PaginaPrincipal.vue';
+import { defineComponent } from 'vue';
+import router from '../router'; // Certifique-se de importar o roteador
 
-export default {
+export default defineComponent({
   name: 'App',
-  components: {
-    PaginaPrincipal
-  }
-}
+  setup() {
+    return {
+      router,
+    };
+  },
+});
 </script>
 
 <style>
@@ -22,4 +25,3 @@ html, body {
   overflow: hidden; /* Remove barras de rolagem */
 }
 </style>
-

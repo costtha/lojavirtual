@@ -11,13 +11,16 @@
             <img src="@/assets/teclado-logo.png" alt="Teclado" class="image1"/>
             
           </div>
-          <div class="retangulo22">
+                <div class="retangulo22">
             
             <h1 class="titulo2"> Teclado Logitech Silent Touch</h1> 
-            <p class="price">R$ 199,90</p>
-            <button class="botao1"> Adicionar ao Carrinho</button>
+                <p class="price">R$ 199,90</p>
+                   
+               </div> 
 
-          </div> 
+               <div class="bot">           
+                         <button class="botao1"> Adicionar ao Carrinho</button>
+                    </div>
         </div>
         <div class="retangulo3">
                 <div class="image-wrapper">
@@ -29,8 +32,12 @@
                  <h1 class="titulo3"> Placa De Vídeo Gigabyte NVIDIA GeForce <br>
                                     RTX 4090 AORUS MASTER, 24GB...</h1>
                  <p class="price">R$ 13.899,90</p>
-                 <button class="botao1"> Adicionar ao Carrinho</button>
+                 
             </div>
+
+                <div class="bot">           
+                         <button class="botao1"> Adicionar ao Carrinho</button>
+                    </div>
           
 
         </div>
@@ -44,12 +51,22 @@
                     
                     <h1 class="titulo4">Pen Drive 128gb Cruzer Blade - Sandisk </h1>
                     <p class="price">R$ 79,80</p>
-                    <button class="botao1"> Adicionar ao Carrinho</button>
-
                 </div>
+
+                <div class="bot">           
+                         <button class="botao1"> Adicionar ao Carrinho</button>
+                    </div>
           
         </div>
       </div>
+        <div class="down"> 
+          <button class="bott"> Carregar mais produto </button>
+          <router-link to="/carrinho">
+                <button class="bott1">Ir para o Carrinho</button>
+          </router-link>
+        </div>
+        
+
     </div>
   </template>
   
@@ -65,43 +82,44 @@
     height: 1080px;
     background-color: #14151D; 
     height: 100vh;             
-    display: flex;             
-    justify-content: center;   
-    align-items: center;       
+    display: flex;
+    flex-direction: column;  
+    justify-content: center; 
+    align-items: center;    
   }
   
   .contene {
     
     display: flex;
-    flex-direction: column;     /* Alinha os elementos em coluna */
-    align-items: center;        /* Centraliza horizontalmente */
-    justify-content: center;    /* Centraliza verticalmente */
-    padding: 20px;             /* Espaço interno */
-    min-height: 200px;         /* Altura mínima do contêiner */
-    max-height: 500px;         /* Altura máxima do contêiner */
-    width: 600px;              /* Largura do contêiner */
+    flex-direction: column;     
+    align-items: center;        
+    justify-content: center;    
+    padding: 30px;            
+    min-height: 200px;         
+    max-height: 500px;         
+    width: 600px;             
   }
   
   .retangulo1 {
-    width: 100%;
+    width: 645px;
     height: 57px;
     border-radius: 8px 8px 0px 0px;
     opacity: 1;
     background-color: #23242C;
-    margin-bottom: 5px; /* Espaço abaixo do retângulo */
-    display: flex;       /* Usando Flexbox para o título */
-    align-items: center; /* Centraliza o título verticalmente */
+    margin-bottom: 5px; 
+    display: flex;       
+    align-items: center; 
   }
   
   .titulo {
     color: white;
-    margin: 0; /* Remove margem padrão do h1 */
+    margin: 0; 
     padding-left: 2%;
-    font-family: 'Inter', sans-serif; /* Definindo a fonte como Inter */
-    font-size: 19px; /* Tamanho da fonte */
-    font-weight: 700; /* Peso da fonte */
-    line-height: 24px; /* Altura da linha */
-    text-align: left; /* Alinhamento do texto */
+    font-family: 'Inter', sans-serif; 
+    font-size: 19px; 
+    font-weight: 700;
+    line-height: 24px; 
+    text-align: left; 
   }
 
   .title {
@@ -113,36 +131,37 @@
   }
   
   .retangulo2 { 
-    width: 100%;
+    width: 645px;
     height: 179px; 
     background-color: #23242C;
-    margin-bottom: 2px; /* Espaço abaixo do retângulo */
+    margin-bottom: 2px; 
     display: flex; 
-    align-items: center; /* Alinhando verticalmente */
+    align-items: center;
   }
 
+ 
 
 
   .image-wrapper {
-    padding-left: 2%;           /* Espaçamento externo à esquerda */
+    padding-left: 2%;          
 }
   
   .image1 {
     width: 122px;
     height: 122px;
-    background-color: white;    /* Fundo branco */
-    border-radius: 6px;         /* Arredondamento dos cantos */
+    background-color: white;    
+    border-radius: 6px;      
   }
 
   .titulo2 {
     color: white;
-    margin-left: 10px; /* Espaçamento à esquerda para separar da imagem */
-    padding: 0; /* Remove espaçamento superior e inferior */
-    font-family: 'Inter', sans-serif; /* Definindo a fonte como Inter */
-    font-size: 16px; /* Tamanho da fonte */
-    font-weight: 400; /* Peso da fonte */
-    line-height: 24px; /* Altura da linha */
-    text-align: left; /* Alinhamento do texto */
+    margin-left: 10px; 
+    padding: 0; 
+    font-family: 'Inter', sans-serif; 
+    font-size: 16px;
+    font-weight: 400; 
+    line-height: 24px; 
+    text-align: left;
   }
 
 
@@ -150,8 +169,9 @@
     color: #A33AFF;
     font-family: 'inter', sans-serif;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 24px;
+    margin-left: 3%;
   }
  
   .botao1 {
@@ -171,18 +191,15 @@
 
   }
   
-  
-  
-  
   .retangulo3 {
-    width: 100%;
+    width: 645px;
     height: 179px; 
     background-color: #23242C;
-    margin-bottom: 2px; /* Espaço abaixo do retângulo */
+    margin-bottom: 2px; 
     display: flex; 
     justify-content: flex-start; 
     align-items: center; 
-    position: relative; /* image1 seja posicionada corretamente */
+    position: relative; 
   }
 
   .titulo3 {
@@ -190,42 +207,42 @@
     margin-left: 10px; 
     padding: 0; 
     font-family: 'Inter', sans-serif; 
-    font-size: 12px; 
+    font-size: 11px; 
     font-weight: 400; 
     line-height: 24px; 
     text-align: left; 
   }
 
   .image-wrapper {
-  padding-left: 2%;           /* Espaçamento externo à esquerda */
+  padding-left: 2%;          
 }
 
   .image2 {
     width: 122px;
     height: 122px;
-    background-color: white;    /* Fundo branco */
-    border-radius: 6px;         /* Arredondamento dos cantos */
+    background-color: white;    
+    border-radius: 6px;        
   }
   
   .retangulo4 {
-    width: 100%;
+    width: 645px;
     height: 179px; 
     background-color: #23242C;
     display: flex; 
     justify-content: flex-start; 
     align-items: center; 
-    position: relative; /* image1 seja posicionada corretamente */
+    position: relative; 
   }
 
   .image-wrapper {
-  padding-left: 2%;           /* Espaçamento externo à esquerda */
+  padding-left: 2%;          
 }
 
   .image3 {
     width: 122px;
     height: 122px;
-    background-color: white;    /* Fundo branco */
-    border-radius: 6px;         /* Arredondamento dos cantos */
+    background-color: white;   
+    border-radius: 6px;         
   }
 
   .titulo4 {
@@ -238,5 +255,58 @@
     line-height: 24px; 
     text-align: left; 
   }
+
+   .retangulo22 {
+    border: 2px #39115c;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+
+  }
+
+  .bot {
+  
+    display: flex;
+    margin-left: 12%;
+  }
+
+  .down {
+  
+    display: flex;         
+    flex-direction: row;    
+    gap: 10px;              
+    justify-content: center; 
+
+  }
+
+
+  .bott {        
+    width: 237px;
+    height: 47px;
+    background-color: #39115c;
+    border: none;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    
+  }
+
+  .bott1 {
+  
+    width: 237px;
+    height: 47px;
+    background: #39CC33;
+    border: none;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    
+  }
+
+
   </style>
   
