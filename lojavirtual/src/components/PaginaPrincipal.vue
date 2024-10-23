@@ -1,80 +1,130 @@
 <template>
-    <div class="layout"> 
-      <div class="contene">
-        <div class="retangulo1">
-          <h1 class="titulo"> 
-            Carrinho de Compras 
-          </h1>
+  <div class="layout">
+    <div class="contene">
+      <div class="retangulo1">
+        <h1 class="titulo">Carrinho de Compras</h1>
+      </div>
+
+      <!-- Teclado -->
+      <div class="retangulo2">
+        <div class="image-wrapper">
+          <img src="@/assets/teclado-logo.png" alt="Teclado" class="image1" />
         </div>
-        <div class="retangulo2">
-          <div class="image-wrapper">
-            <img src="@/assets/teclado-logo.png" alt="Teclado" class="image1"/>
-            
-          </div>
-                <div class="retangulo22">
-            
-            <h1 class="titulo2"> Teclado Logitech Silent Touch</h1> 
-                <p class="price">R$ 199,90</p>
-                   
-               </div> 
-
-               <div class="bot">           
-                         <button class="botao1"> Adicionar ao Carrinho</button>
-                    </div>
+        <div class="retangulo22">
+          <h1 class="titulo2">Teclado Logitech Silent Touch</h1>
+          <p class="price">R$ 199,90</p>
         </div>
-        <div class="retangulo3">
-                <div class="image-wrapper">
-                <img src="@/assets/placadevideo-logo.png" alt="Placa De Vídeo" class="image2"/>
-                   
-          </div>
-                    
-            <div class="retangulo22">
-                 <h1 class="titulo3"> Placa De Vídeo Gigabyte NVIDIA GeForce <br>
-                                    RTX 4090 AORUS MASTER, 24GB...</h1>
-                 <p class="price">R$ 13.899,90</p>
-                 
-            </div>
-
-                <div class="bot">           
-                         <button class="botao1"> Adicionar ao Carrinho</button>
-                    </div>
-          
-
-        </div>
-        <div class="retangulo4">
-            <div class="image-wrapper">
-                <img src="@/assets/pendrive-logo.png" alt="Pen Drive" class="image3"/>
-                
-          </div>
-
-                <div class="retangulo22">
-                    
-                    <h1 class="titulo4">Pen Drive 128gb Cruzer Blade - Sandisk </h1>
-                    <p class="price">R$ 79,80</p>
-                </div>
-
-                <div class="bot">           
-                         <button class="botao1"> Adicionar ao Carrinho</button>
-                    </div>
-          
+        <div class="bot">
+          <!-- Adiciona o produto 'Teclado' ao carrinho -->
+          <button
+      class="botao1"
+      @click="adicionarAoCarrinho({
+        nome: 'Teclado Logitech Silent Touch',
+        preco: 199.90,
+        imagemUrl: require('@/assets/teclado-logo.png') // Aqui está o caminho da imagem
+      })">
+      Adicionar ao Carrinho
+    </button>
         </div>
       </div>
-        <div class="down"> 
-          <button class="bott"> Carregar mais produto </button>
-          <router-link to="/carrinho">
-                <button class="bott1">Ir para o Carrinho</button>
-          </router-link>
-        </div>
-        
 
+      <!-- Placa de Vídeo -->
+      <div class="retangulo3">
+        <div class="image-wrapper">
+          <img src="@/assets/placadevideo-logo.png" alt="Placa De Vídeo" class="image2" />
+        </div>
+        <div class="retangulo22">
+          <h1 class="titulo3">
+            Placa De Vídeo Gigabyte NVIDIA GeForce <br />RTX 4090 AORUS MASTER, 24GB...
+          </h1>
+          <p class="price">R$ 13.899,90</p>
+        </div>
+        <div class="bot">
+          <!-- Adiciona o produto 'Placa de Vídeo' ao carrinho -->
+          <button
+            class="botao1"
+            @click="adicionarAoCarrinho({ 
+              nome: 'Placa De Vídeo Gigabyte NVIDIA GeForce RTX 4090', 
+              preco: 13899.90,
+              imagemUrl: require('@/assets/placadevideo-logo.png') })"
+          >
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+
+      <!-- Pen Drive -->
+      <div class="retangulo4">
+        <div class="image-wrapper">
+          <img src="@/assets/pendrive-logo.png" alt="Pen Drive" class="image3" />
+        </div>
+        <div class="retangulo22">
+          <h1 class="titulo4">Pen Drive 128gb Cruzer Blade - Sandisk</h1>
+          <p class="price">R$ 79,80</p>
+        </div>
+        <div class="bot">
+          <button
+  class="botao1"
+  @click="adicionarAoCarrinho({
+    nome: 'Pen Drive 128gb Cruzer Blade - Sandisk',
+    preco: 79.80,
+    imagemUrl: require('@/assets/pendrive-logo.png')
+  })"
+>
+  Adicionar ao Carrinho
+</button>
+
+  </div>
+
+ 
+      </div>
     </div>
-  </template>
+
+    <div class="down">
+      <button class="bott">Carregar mais produto</button>
+      <router-link to="/carrinho">
+        <button class="bott1">Ir para o Carrinho</button>
+      </router-link>
+    </div>
+  </div>
+</template>
+
+
   
-  <script>
-  export default {
-    name: 'PaginaPrincipal'
+<script>
+export default {
+  name: 'PaginaPrincipal',
+  data() {
+    return {
+      carrinho: [] // Array para armazenar os itens adicionados ao carrinho
+    };
+  },
+  mounted() {
+  const carrinhoSalvo = localStorage.getItem('carrinho');
+  if (carrinhoSalvo) {
+    this.carrinho = JSON.parse(carrinhoSalvo);
   }
-  </script>
+},
+  methods: {
+  adicionarAoCarrinho(produto) {
+    const produtoExistente = this.carrinho.find(item => item.nome === produto.nome);
+    
+    if (produtoExistente) {
+      // Se o produto já estiver no carrinho, apenas aumente a quantidade
+      produtoExistente.quantidade += 1;
+    } else {
+      // Se não estiver, adicione um novo produto ao carrinho
+      this.carrinho.push({ ...produto, quantidade: 1 });
+    }
+    
+    // Salva o carrinho no localStorage
+    localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
+  },
+}
+}
+</script>
+
+  
   
   <style scoped>
   .layout {
