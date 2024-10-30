@@ -35,6 +35,7 @@
     </div>
 
     <div v-if="pedidoFinalizado" class="container-confirmacao">
+      <h1>Sucesso!</h1>
       <p class="mensagem-confirmacao">
         Seu pedido foi aceito! Em instantes você receberá um e-mail de confirmação com o código de rastreamento para a sua entrega.
       </p>

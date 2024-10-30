@@ -12,19 +12,20 @@
         </div>
         <div class="retangulo22">
           <h1 class="titulo2">Teclado Logitech Silent Touch</h1>
+          <div class="avaliacao">
+               <span class="estrelas">⭐ ⭐ ⭐ ⭐ ⭐</span> 
+               <span class="avaliacoes">(935 avaliações)</span>
+          </div>
           <p class="price">R$ 199,90</p>
         </div>
         <div class="bot">
-          <!-- Adiciona o produto 'Teclado' ao carrinho -->
-          <button
-      class="botao1"
-      @click="adicionarAoCarrinho({
-        nome: 'Teclado Logitech Silent Touch',
-        preco: 199.90,
-        imagemUrl: require('@/assets/teclado-logo.png') // Aqui está o caminho da imagem
-      })">
-      Adicionar ao Carrinho
-    </button>
+          <button class="botao1" @click="adicionarAoCarrinho({
+              nome: 'Teclado Logitech Silent Touch',
+              preco: 199.90,
+              imagemUrl: require('@/assets/teclado-logo.png') 
+          })">
+            Adicionar ao Carrinho
+          </button>
         </div>
       </div>
 
@@ -34,20 +35,19 @@
           <img src="@/assets/placadevideo-logo.png" alt="Placa De Vídeo" class="image2" />
         </div>
         <div class="retangulo22">
-          <h1 class="titulo3">
-            Placa De Vídeo Gigabyte NVIDIA GeForce <br />RTX 4090 AORUS MASTER, 24GB...
-          </h1>
+          <h1 class="titulo3">Placa De Vídeo Gigabyte NVIDIA GeForce RTX 4090 AORUS MASTER, 24GB...</h1>
+          <div class="avaliacao">
+               <span class="estrelas">⭐ ⭐ ⭐ ⭐ ⭐</span> 
+               <span class="avaliacoes">(128 avaliações)</span> 
+          </div>
           <p class="price">R$ 13.899,90</p>
         </div>
         <div class="bot">
-          <!-- Adiciona o produto 'Placa de Vídeo' ao carrinho -->
-          <button
-            class="botao1"
-            @click="adicionarAoCarrinho({ 
+          <button class="botao1" @click="adicionarAoCarrinho({ 
               nome: 'Placa De Vídeo Gigabyte NVIDIA GeForce RTX 4090', 
               preco: 13899.90,
-              imagemUrl: require('@/assets/placadevideo-logo.png') })"
-          >
+              imagemUrl: require('@/assets/placadevideo-logo.png') 
+          })">
             Adicionar ao Carrinho
           </button>
         </div>
@@ -60,28 +60,26 @@
         </div>
         <div class="retangulo22">
           <h1 class="titulo4">Pen Drive 128gb Cruzer Blade - Sandisk</h1>
+          <div class="avaliacao">
+               <span class="estrelas">⭐ ⭐ ⭐ ⭐ ⭐</span> 
+               <span class="avaliacoes">(128 avaliações)</span> 
+          </div>
           <p class="price">R$ 79,80</p>
         </div>
         <div class="bot">
-          <button
-  class="botao1"
-  @click="adicionarAoCarrinho({
-    nome: 'Pen Drive 128gb Cruzer Blade - Sandisk',
-    preco: 79.80,
-    imagemUrl: require('@/assets/pendrive-logo.png')
-  })"
->
-  Adicionar ao Carrinho
-</button>
-
-  </div>
-
- 
+          <button class="botao1" @click="adicionarAoCarrinho({
+              nome: 'Pen Drive 128gb Cruzer Blade - Sandisk',
+              preco: 79.80,
+              imagemUrl: require('@/assets/pendrive-logo.png')
+          })">
+            Adicionar ao Carrinho
+          </button>
+        </div>
       </div>
     </div>
 
     <div class="down">
-      <button class="bott">Carregar mais produto</button>
+      <button class="bott">Carregar mais produtos</button>
       <router-link to="/carrinho">
         <button class="bott1">Ir para o Carrinho</button>
       </router-link>
@@ -90,13 +88,14 @@
 </template>
 
 
+
   
 <script>
 export default {
   name: 'PaginaPrincipal',
   data() {
     return {
-      carrinho: [] // Array para armazenar os itens adicionados ao carrinho
+      carrinho: [] 
     };
   },
   mounted() {
@@ -110,14 +109,14 @@ export default {
     const produtoExistente = this.carrinho.find(item => item.nome === produto.nome);
     
     if (produtoExistente) {
-      // Se o produto já estiver no carrinho, apenas aumente a quantidade
+      
       produtoExistente.quantidade += 1;
     } else {
-      // Se não estiver, adicione um novo produto ao carrinho
+      
       this.carrinho.push({ ...produto, quantidade: 1 });
     }
     
-    // Salva o carrinho no localStorage
+   
     localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
   },
 }
@@ -182,11 +181,13 @@ export default {
   
   .retangulo2 { 
     width: 645px;
-    height: 179px; 
+    height: 179px;
     background-color: #23242C;
-    margin-bottom: 2px; 
-    display: flex; 
+    margin-bottom: 2px;
+    display: flex;
     align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
   }
 
  
@@ -243,13 +244,13 @@ export default {
   
   .retangulo3 {
     width: 645px;
-    height: 179px; 
+    height: 179px;
     background-color: #23242C;
-    margin-bottom: 2px; 
-    display: flex; 
-    justify-content: flex-start; 
-    align-items: center; 
-    position: relative; 
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
   }
 
   .titulo3 {
@@ -257,7 +258,7 @@ export default {
     margin-left: 10px; 
     padding: 0; 
     font-family: 'Inter', sans-serif; 
-    font-size: 11px; 
+    font-size: 10px; 
     font-weight: 400; 
     line-height: 24px; 
     text-align: left; 
@@ -276,12 +277,13 @@ export default {
   
   .retangulo4 {
     width: 645px;
-    height: 179px; 
+    height: 179px;
     background-color: #23242C;
-    display: flex; 
-    justify-content: flex-start; 
-    align-items: center; 
-    position: relative; 
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
   }
 
   .image-wrapper {
@@ -306,19 +308,26 @@ export default {
     text-align: left; 
   }
 
-   .retangulo22 {
-    border: 2px #39115c;
+  .retangulo22 {
+
+     
     display: flex;
     flex-direction: column;
     margin-left: 2%;
-
+    width: 400px; 
+    height: 120px; 
+    justify-content: space-between;
   }
 
   .bot {
   
+    
     display: flex;
-    margin-left: 12%;
+    margin-right: 10px;
+   
   }
+
+
 
   .down {
   
@@ -357,6 +366,35 @@ export default {
     
   }
 
+  .estrelas {
+    color: #FFD700; 
+    font-size: 16px;
+    margin-top: 4px;
+    margin-left: 10px;
+  }
+
+
+  .avaliacao {
+    display: flex; 
+    align-items: center; 
+    
+  }
+
+  .avaliacoes {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: #646464;
+    line-height: 24px;
+    text-align: left; 
+    margin-left: 5px; 
+    padding: 2px; 
+    border-radius: 4px; 
+    display: inline-block; 
+    vertical-align: middle; 
+  }
+
+  
 
   </style>
   
