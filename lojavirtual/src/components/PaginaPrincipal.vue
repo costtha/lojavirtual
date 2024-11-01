@@ -12,9 +12,13 @@
         </div>
         <div class="retangulo22">
           <h1 class="titulo2">Teclado Logitech Silent Touch</h1>
-          <div class="avaliacao">
-               <span class="estrelas">⭐ ⭐ ⭐ ⭐ ⭐</span> 
-               <span class="avaliacoes">(935 avaliações)</span>
+          <div class="product-rating">
+            <div class="stars">
+              <span v-for="star in fullStars" :key="'full-' + star" class="star full"></span>
+              <span v-if="halfStar" class="star half"></span>
+              <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty"></span>
+            </div>
+            <span class="reviews">(935 avaliações)</span>
           </div>
           <p class="price">R$ 199,90</p>
         </div>
@@ -36,9 +40,13 @@
         </div>
         <div class="retangulo22">
           <h1 class="titulo3">Placa De Vídeo Gigabyte NVIDIA GeForce RTX 4090 AORUS MASTER, 24GB...</h1>
-          <div class="avaliacao">
-               <span class="estrelas">⭐ ⭐ ⭐ ⭐ ⭐</span> 
-               <span class="avaliacoes">(128 avaliações)</span> 
+          <div class="product-rating">
+            <div class="stars">
+              <span v-for="star in fullStars" :key="'full-' + star" class="star full"></span>
+              <span v-if="halfStar" class="star half"></span>
+              <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty"></span>
+            </div>
+            <span class="reviews">(128 avaliações)</span>
           </div>
           <p class="price">R$ 13.899,90</p>
         </div>
@@ -60,9 +68,13 @@
         </div>
         <div class="retangulo22">
           <h1 class="titulo4">Pen Drive 128gb Cruzer Blade - Sandisk</h1>
-          <div class="avaliacao">
-               <span class="estrelas">⭐ ⭐ ⭐ ⭐ ⭐</span> 
-               <span class="avaliacoes">(128 avaliações)</span> 
+          <div class="product-rating">
+            <div class="stars">
+              <span v-for="star in fullStars" :key="'full-' + star" class="star full"></span>
+              <span v-if="halfStar" class="star half"></span>
+              <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty"></span>
+            </div>
+            <span class="reviews">(128 avaliações)</span>
           </div>
           <p class="price">R$ 79,80</p>
         </div>
@@ -95,37 +107,55 @@ export default {
   name: 'PaginaPrincipal',
   data() {
     return {
-      carrinho: [] 
+      carrinho: [],
+      rating: 3.5, // Nota de avaliação, você pode ajustar conforme necessário
+      maxRating: 5
     };
   },
-  mounted() {
-  const carrinhoSalvo = localStorage.getItem('carrinho');
-  if (carrinhoSalvo) {
-    this.carrinho = JSON.parse(carrinhoSalvo);
-  }
-},
-  methods: {
-  adicionarAoCarrinho(produto) {
-    const produtoExistente = this.carrinho.find(item => item.nome === produto.nome);
-    
-    if (produtoExistente) {
-      
-      produtoExistente.quantidade += 1;
-    } else {
-      
-      this.carrinho.push({ ...produto, quantidade: 1 });
+  computed: {
+    fullStars() {
+      return Math.floor(this.rating);
+    },
+    halfStar() {
+      return this.rating % 1 !== 0;
+    },
+    emptyStars() {
+      return this.maxRating - this.fullStars - (this.halfStar ? 1 : 0);
     }
-    
-   
-    localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
   },
-}
-}
+  mounted() {
+    const carrinhoSalvo = localStorage.getItem('carrinho');
+    if (carrinhoSalvo) {
+      this.carrinho = JSON.parse(carrinhoSalvo);
+    }
+  },
+  methods: {
+    adicionarAoCarrinho(produto) {
+      const produtoExistente = this.carrinho.find(item => item.nome === produto.nome);
+      
+      if (produtoExistente) {
+        produtoExistente.quantidade += 1;
+      } else {
+        this.carrinho.push({ ...produto, quantidade: 1 });
+      }
+      
+      localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
+    },
+  }
+};
+
 </script>
 
   
   
   <style scoped>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
   .layout {
     width: 1920;
     height: 1080px;
@@ -149,8 +179,9 @@ export default {
   }
   
   .retangulo1 {
-    width: 645px;
-    height: 57px;
+    
+    width: 645px; 
+    padding: 10px;
     border-radius: 8px 8px 0px 0px;
     opacity: 1;
     background-color: #23242C;
@@ -219,7 +250,12 @@ export default {
     font-weight: bold;
     font-size: 20px;
     line-height: 24px;
-    margin-left: 3%;
+    justify-content: center; 
+    padding: 7px;
+    margin-top: auto;
+    
+    
+    
   }
  
   .botao1 {
@@ -306,14 +342,15 @@ export default {
   }
 
   .retangulo22 {
-
-   
-    display: flex;
-    flex-direction: column;
-    margin-left: 2%;
     width: 400px; 
     height: 120px; 
+    margin: 0; 
+    padding: 0; 
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    
+    
   }
 
   .bot {
@@ -363,34 +400,47 @@ export default {
     
   }
 
-  .estrelas {
-    color: #FFD700; 
-    font-size: 16px;
-    margin-top: 4px;
-    margin-left: 10px;
-  }
+  .product-rating {
+  margin-left: 2%;
+  display: flex;
+  align-items: center;
+}
+
+.stars {
+  display: flex;
+}
+
+.star {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 5px; 
+  padding: 0; 
+  background-color: #FFAE00;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
 
 
-  .avaliacao {
-    display: flex; 
-    align-items: center; 
-    
-  }
 
-  .avaliacoes {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 400;
-    color: #646464;
-    line-height: 24px;
-    text-align: left; 
-    margin-left: 5px; 
-    padding: 2px; 
-    border-radius: 4px; 
-    display: inline-block; 
-    vertical-align: middle; 
-  }
+.star.full {
+  background-color: #FFAE00;
+}
 
+.star.half {
+  background: linear-gradient(to right, #FFAE00 50%, );
+}
+
+.star.empty {
+  background-color: #d3d3d3;
+}
+
+.reviews {
+  margin-left: 8px;
+  color: gray;
+  font-size: 0.9em;
+}
   
 
   </style>
