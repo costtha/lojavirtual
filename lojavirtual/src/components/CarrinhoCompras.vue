@@ -13,8 +13,24 @@
           <div class="retangulo22">
             <h1 class="titulo2">{{ produto.nome }}</h1>
             <p class="price">R$ {{ produto.preco.toFixed(2) }}</p>
-            <p class="quantity">Quantidade: {{ produto.quantidade }}</p>
+           
           </div>
+          <div class="retangulo222"> 
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  <div class="quant"> 
+                    <p class="quantity">{{ produto.quantidade }}</p> 
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  
+          </div>
+                  <div class="sub">
+                    <div class="texto-normal">Subtotal</div>
+                    <div class="texto-preco">R$ 399,80</div>
+                  </div>
         </div>
       </div>
 
@@ -111,6 +127,7 @@ export default {
 }
 
 .contene {
+   
     display: flex;
     flex-direction: column;     
     align-items: center;        
@@ -122,6 +139,7 @@ export default {
 }
 
 .retangulo1 {
+   
     width: 100%; 
     height: 57px;
     border-radius: 8px 8px 0px 0px;
@@ -129,6 +147,42 @@ export default {
     margin-bottom: 5px; 
     display: flex;       
     align-items: center; 
+}
+
+.retangulo22 {
+
+
+display: flex;
+flex-direction: column;
+margin-left: 2%;
+width: 200px; 
+height: 120px; 
+justify-content: space-between;
+}
+
+.retangulo222 {
+    
+    width: 24px; 
+    height: 87px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: center; 
+
+}
+
+.sub {
+    border: 3px solid red; 
+    width: 170px; 
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    height: 100px; 
+ 
+
 }
 
 .titulo {
@@ -141,6 +195,7 @@ export default {
 }
 
 .item-carrinho {
+   
     width: 100%; 
     background-color: #23242C;
     margin-bottom: 2px; 
@@ -181,6 +236,11 @@ export default {
     color: white;
     font-family: 'Inter', sans-serif;
     font-size: 14px; 
+}
+
+.quant {
+  font-size: 24px; 
+  line-height: 1;
 }
 
 .empty-cart {
@@ -281,6 +341,27 @@ export default {
     font-family: 'Inter', sans-serif; 
     font-size: 19px;
     
+}
+
+.texto-normal {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #FFFFFF;
+  padding: 8px; 
+}
+
+.texto-preco {
+  font-family: Inter, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  color: #A33AFF;
+  padding: 8px; 
+  margin-top: 4px; 
 }
 
 </style>

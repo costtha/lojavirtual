@@ -310,7 +310,7 @@ export default {
 
   .retangulo22 {
 
-     
+    border: 3px solid red; 
     display: flex;
     flex-direction: column;
     margin-left: 2%;
