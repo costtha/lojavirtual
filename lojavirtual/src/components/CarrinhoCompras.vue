@@ -12,7 +12,8 @@
         </div>
         <div class="retangulo22">
             <h1 class="titulo2">{{ produto.nome }}</h1>
-            <p class="price">R$ {{ produto.preco.toFixed(2) }}</p>
+            <p class="price">{{ produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</p>
+
         </div>
         <div class="retangulo222">
             <div class="circle-icon" @click="increaseQuantity(index)">
@@ -31,7 +32,8 @@
         </div>
         <div class="sub">
             <div class="texto-normal">Subtotal</div>
-            <div class="texto-preco">R$ {{ (produto.preco * produto.quantidade).toFixed(2) }}</div>
+            <div class="texto-preco"> {{ (produto.preco * produto.quantidade).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</div>
+
         </div>
     </div>
 </div>
@@ -41,7 +43,7 @@
       </div>
 
       <div class="total">
-        <h2 class="titulo">Total: <span class="valor-total">R$ {{ valorTotal.toFixed(2) }}</span></h2>
+        <h2 class="titulo">Total: <span class="valor-total"> {{ valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</span></h2>
       </div>
 
     </div>
@@ -60,6 +62,9 @@
       <button class="botao-confirmacao" @click="fecharConfirmacao">Ok</button>
     </div>
   </div>
+
+  <div v-if="pedidoFinalizado" class="overlay"></div>
+
 </template>
 
 <script>
@@ -205,6 +210,7 @@ export default {
     font-family: 'Inter', sans-serif; 
     font-size: 19px; 
     font-weight: 700;
+    text-align: left; 
 }
 
 .item-carrinho {
@@ -261,6 +267,9 @@ export default {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .down {
@@ -282,14 +291,32 @@ export default {
 
 .bott {
     background-color: #39115c;
+    border: none;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .bott1 {
     background: #39CC33;
+    border: none;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .bott2 {
     background: #971111;
+    border: none;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .total {
@@ -402,4 +429,18 @@ export default {
   height: 24px;
   transition: transform 0.3s; 
 }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh; 
+    background-color: rgba(0, 0, 0, 0.9); 
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
 </style>
