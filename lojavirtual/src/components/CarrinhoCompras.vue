@@ -1,38 +1,40 @@
 <template>
-  <div class="layout">
+ <div class="layout">
     <div class="contene">
       <div class="retangulo1">
         <h1 class="titulo">Carrinho de Compras</h1>
       </div>
 
       <div class="retangulo2" v-if="carrinho.length > 0">
-        <div v-for="(produto, index) in carrinho" :key="index" class="item-carrinho">
-          <div class="image-wrapper">
+    <div v-for="(produto, index) in carrinho" :key="index" class="item-carrinho">
+        <div class="image-wrapper">
             <img :src="produto.imagemUrl" alt="Product Image" class="image1" />
-          </div>
-          <div class="retangulo22">
+        </div>
+        <div class="retangulo22">
             <h1 class="titulo2">{{ produto.nome }}</h1>
             <p class="price">R$ {{ produto.preco.toFixed(2) }}</p>
-           
-          </div>
-          <div class="retangulo222"> 
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                  <div class="quant"> 
-                    <p class="quantity">{{ produto.quantidade }}</p> 
-                  </div>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                  
-          </div>
-                  <div class="sub">
-                    <div class="texto-normal">Subtotal</div>
-                    <div class="texto-preco">R$ 399,80</div>
-                  </div>
         </div>
-      </div>
+        <div class="retangulo222">
+            <div class="circle-icon" @click="increaseQuantity(index)">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 plus">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </div>
+            <div class="quant"> 
+                <p class="quantity">{{ produto.quantidade }}</p> 
+            </div>
+            <div class="circle-icon" @click="decreaseQuantity(index)">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 minus">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </div>
+        </div>
+        <div class="sub">
+            <div class="texto-normal">Subtotal</div>
+            <div class="texto-preco">R$ {{ (produto.preco * produto.quantidade).toFixed(2) }}</div>
+        </div>
+    </div>
+</div>
 
       <div v-else>
         <p class="empty-cart">Seu carrinho está vazio!</p>
@@ -40,7 +42,7 @@
 
       <div class="total">
         <h2 class="titulo">Total: <span class="valor-total">R$ {{ valorTotal.toFixed(2) }}</span></h2>
-    </div>
+      </div>
 
     </div>
 
@@ -57,12 +59,12 @@
       </p>
       <button class="botao-confirmacao" @click="fecharConfirmacao">Ok</button>
     </div>
-    
-
   </div>
 </template>
 
 <script>
+
+
 export default {
   name: 'CarrinhoCompras',
   data() {
@@ -109,81 +111,92 @@ export default {
       localStorage.setItem('carrinho', JSON.stringify(this.carrinho)); 
       produto.adicionado = true; 
     },
+    increaseQuantity(index) {
+      this.carrinho[index].quantidade += 1;
+      localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
+    },
+    decreaseQuantity(index) {
+      if (this.carrinho[index].quantidade > 0) {
+        this.carrinho[index].quantidade -= 1;
+        localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
+      }
+    }
   },
 }
 </script>
 
 
 <style scoped>
-.layout {
+.layout { 
     width: 100vw; 
     height: 100vh; 
     background-color: #14151D; 
-    position: relative;
     display: flex;
-    flex-direction: column;  
-    justify-content: center; 
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+   
 }
 
 .contene {
-   
-    display: flex;
-    flex-direction: column;     
-    align-items: center;        
-    justify-content: center;    
-    padding: 30px;            
-    min-height: 200px;         
-    max-height: 500px;         
-    width: 600px; 
+    width: 100%; 
+    max-width: 645px; 
+    padding: 10px; 
+    box-sizing: border-box;    
+    
 }
 
-.retangulo1 {
-   
-    width: 100%; 
-    height: 57px;
-    border-radius: 8px 8px 0px 0px;
+.retangulo1 { 
+  
+    width: 100%; /* Largura total do contêiner */
+    padding: 10px;
     background-color: #23242C;
+    text-align: center; 
+    border-radius: 8px 8px 0px 0px;
     margin-bottom: 5px; 
-    display: flex;       
-    align-items: center; 
+    
 }
 
 .retangulo22 {
-
-
-display: flex;
-flex-direction: column;
-margin-left: 2%;
-width: 200px; 
-height: 120px; 
-justify-content: space-between;
+    width: 50%;
+    height: auto;
+    background-color: #23242C;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
 }
 
 .retangulo222 {
-    
     width: 24px; 
     height: 87px;
     color: white;
     display: flex;
     flex-direction: column;
+    align-items: center; 
     justify-content: space-between; 
     align-items: center; 
 
 }
 
 .sub {
-    border: 3px solid red; 
     width: 170px; 
     height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: center; 
-    align-items: center; 
     height: 100px; 
- 
-
+    padding: 15px;
+    margin: 0;
 }
+
+.sub > div {
+    margin: 0; 
+    padding: 0; 
+    
+}
+
+
 
 .titulo {
     color: white;
@@ -345,7 +358,7 @@ justify-content: space-between;
 
 .texto-normal {
   font-family: Inter, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 24px;
   text-align: left;
@@ -364,4 +377,29 @@ justify-content: space-between;
   margin-top: 4px; 
 }
 
+
+.circle-icon {
+  width: 36px;  
+  height: 36px; 
+  border-radius: 50%; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+}
+
+
+
+
+.circle-icon:hover .plus,
+.circle-icon:hover .minus {
+  transform: scale(1.2); 
+}
+
+.size-6 {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s; 
+}
 </style>

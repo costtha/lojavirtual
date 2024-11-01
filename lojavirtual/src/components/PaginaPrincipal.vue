@@ -137,8 +137,7 @@ export default {
     align-items: center;    
   }
   
-  .contene {
-    
+  .contene { 
     display: flex;
     flex-direction: column;     
     align-items: center;        
@@ -171,9 +170,7 @@ export default {
     text-align: left; 
   }
 
-  .title {
-    
-    border: 3px solid red;  
+  .title {  
     width: 440px; 
     height: 118px;
 
@@ -310,7 +307,7 @@ export default {
 
   .retangulo22 {
 
-    border: 3px solid red; 
+   
     display: flex;
     flex-direction: column;
     margin-left: 2%;
