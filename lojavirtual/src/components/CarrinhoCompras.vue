@@ -55,13 +55,31 @@
     </div>
 
     <div v-if="pedidoFinalizado" class="container-confirmacao">
-      <h1>Sucesso!</h1>
+      <h1 class="titulo-de-confirmacao">Sucesso!</h1>
+      <div class="linha"></div>
       <p class="mensagem-confirmacao">
         Seu pedido foi aceito! Em instantes você receberá um e-mail de confirmação com o código de rastreamento para a sua entrega.
       </p>
       <button class="botao-confirmacao" @click="fecharConfirmacao">Ok</button>
     </div>
   </div>
+
+  <div v-if="exibirConfirmacaoLimpeza" class="overlay">
+  <div class="container-confirmacao">
+    <h1 class="titulo-de-confirmacao">Aviso!</h1>
+    <div class="linha"></div>
+    <p class="mensagem-confirmacao">
+      Você está prestes a remover todos os itens do carrinho.
+      Você tem certeza que deseja prosseguir?
+    </p>
+    <div class="botao-container"> 
+      <!-- Botão "Não" cancela a limpeza -->
+      <button class="botao-confir-v" @click="cancelarLimpeza">Não</button>
+      <!-- Botão "Sim" confirma a limpeza -->
+      <button class="botao-confir-f" @click="confirmarLimpeza">Sim</button>
+    </div>
+  </div>
+</div>
 
   <div v-if="pedidoFinalizado" class="overlay"></div>
 
@@ -75,7 +93,8 @@ export default {
   data() {
     return {
       carrinho: [],
-      pedidoFinalizado: false 
+      pedidoFinalizado: false,
+      exibirConfirmacaoLimpeza: false
     };
   },
   mounted() {
@@ -94,9 +113,18 @@ export default {
       this.$router.push('/');
     },
     limparCarrinho() {
-      this.carrinho = [];
-      localStorage.removeItem('carrinho');
+      this.exibirConfirmacaoLimpeza = true
     },
+
+    confirmarLimpeza() {
+    this.carrinho = []; 
+    localStorage.removeItem('carrinho'); 
+    this.exibirConfirmacaoLimpeza = false;
+  },
+  cancelarLimpeza() {
+    this.exibirConfirmacaoLimpeza = false; 
+  },
+
     finalizarPedido() {
       this.pedidoFinalizado = true; 
     },
@@ -348,39 +376,58 @@ export default {
 }
 
 .container-confirmacao {
-  position: absolute; 
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  width: 736.67px; 
-  height: 87.66px; 
-  background: #23242C; 
-  font-family: 'Inter', sans-serif; 
-  font-size: 21.25px; 
-  font-weight: 400; 
-  line-height: 25.72px; 
-  text-align: center; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
-  margin-top: 20px; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background: #23242C;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    z-index: 1000;
+}
+
+.titulo-de-confirmacao {
+  font-family: 'Inter', sans-serif;
+  text-align: left;
+  font-size: 28.33px;
+  color: white;
+
+
+}
+
+.linha {
+    width: 100%;
+    height: 1px;
+    background-color: white; 
+    margin-top: 8px;
+    margin-bottom: 16px;
 }
 
 .mensagem-confirmacao {
-    margin: 0; 
-    padding: 10px; 
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    color: white;
+    text-align: left;
+    width: 430px;
 }
 
 .botao-confirmacao {
-    width: 122px; 
-    height: 56px; 
-    border-radius: 10.63px 0px 0px 0px; 
-    background: #39CC33; 
-    color: white; 
-    font-family: 'Inter', sans-serif; 
-    font-size: 19px;
-    
+    margin-top: 15px;
+    padding: 8px 20px;
+    background-color: #39CC33;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: auto; 
+    display: block;
 }
 
 .texto-normal {
@@ -435,12 +482,45 @@ export default {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh; 
-    background-color: rgba(0, 0, 0, 0.9); 
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
     z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
+}
+
+.botao-container {
+
+  display: flex;         
+  gap: 10px; 
+  justify-content: flex-end; 
+}
+
+.botao-confir-v {
+  margin-top: 15px;
+  padding: 8px 20px;
+  background: #971111;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+ 
+
+}
+
+.botao-confir-f {
+  margin-top: 15px;
+  padding: 8px 20px;
+  background: #39CC33;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
 }
 
 </style>

@@ -14,9 +14,14 @@
           <h1 class="titulo2">Teclado Logitech Silent Touch</h1>
           <div class="product-rating">
             <div class="stars">
-              <span v-for="star in fullStars" :key="'full-' + star" class="star full"></span>
-              <span v-if="halfStar" class="star half"></span>
-              <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty"></span>
+              <!-- Estrelas cheias -->
+              <span v-for="star in fullStars" :key="'full-' + star" class="star full">&#9733;</span>
+              
+              <!-- Estrela meia (se necessário) -->
+              <span v-if="halfStar" class="star half">&#9733;</span>
+              
+              <!-- Estrelas vazias (garantir que sempre sejam 2 últimas estrelas) -->
+              <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty">&#9734;</span>
             </div>
             <span class="reviews">(935 avaliações)</span>
           </div>
@@ -42,9 +47,14 @@
           <h1 class="titulo3">Placa De Vídeo Gigabyte NVIDIA GeForce RTX 4090 AORUS MASTER, 24GB...</h1>
           <div class="product-rating">
             <div class="stars">
-              <span v-for="star in fullStars" :key="'full-' + star" class="star full"></span>
-              <span v-if="halfStar" class="star half"></span>
-              <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty"></span>
+              <!-- Estrelas cheias -->
+              <span v-for="star in fullStars" :key="'full-' + star" class="star full">&#9733;</span>
+              
+              <!-- Estrela meia (se necessário) -->
+              <span v-if="halfStar" class="star half">&#9733;</span>
+              
+              <!-- Estrelas vazias (garantir que sempre sejam 2 últimas estrelas) -->
+              <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty">&#9734;</span>
             </div>
             <span class="reviews">(128 avaliações)</span>
           </div>
@@ -70,9 +80,14 @@
           <h1 class="titulo4">Pen Drive 128gb Cruzer Blade - Sandisk</h1>
           <div class="product-rating">
             <div class="stars">
-              <span v-for="star in fullStars" :key="'full-' + star" class="star full"></span>
-              <span v-if="halfStar" class="star half"></span>
-              <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty"></span>
+              <!-- Estrelas cheias -->
+              <span v-for="star in fullStars" :key="'full-' + star" class="star full">&#9733;</span>
+              
+              <!-- Estrela meia (se necessário) -->
+              <span v-if="halfStar" class="star half">&#9733;</span>
+              
+              <!-- Estrelas vazias (garantir que sempre sejam 2 últimas estrelas) -->
+              <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty">&#9734;</span>
             </div>
             <span class="reviews">(128 avaliações)</span>
           </div>
@@ -89,6 +104,8 @@
         </div>
       </div>
     </div>
+
+    
 
     <div class="down">
       <button class="bott">Carregar mais produtos</button>
@@ -108,8 +125,9 @@ export default {
   data() {
     return {
       carrinho: [],
-      rating: 3.5, // Nota de avaliação, você pode ajustar conforme necessário
-      maxRating: 5
+      rating: 4, 
+      maxRating: 5,
+      produtosVisiveis: 3
     };
   },
   computed: {
@@ -141,6 +159,9 @@ export default {
       
       localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
     },
+    carregarMaisProdutos() {
+      this.produtosVisiveis += 3; // Adiciona mais produtos visíveis ao clicar
+    }
   }
 };
 
@@ -179,7 +200,6 @@ export default {
   }
   
   .retangulo1 {
-    
     width: 645px; 
     padding: 10px;
     border-radius: 8px 8px 0px 0px;
@@ -207,7 +227,7 @@ export default {
 
   }
   
-  .retangulo2 { 
+  .retangulo2 {
     width: 645px;
     height: 179px;
     background-color: #23242C;
@@ -248,11 +268,12 @@ export default {
     color: #A33AFF;
     font-family: 'inter', sans-serif;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
     line-height: 24px;
     justify-content: center; 
     padding: 7px;
-    margin-top: auto;
+    margin-bottom: 10%;
+    margin-left: 2%;
     
     
     
@@ -401,45 +422,23 @@ export default {
   }
 
   .product-rating {
-  margin-left: 2%;
+  margin-left: 3%;
   display: flex;
   align-items: center;
 }
 
-.stars {
-  display: flex;
-}
 
 .star {
-  width: 16px;
-  height: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 5px; 
-  padding: 0; 
-  background-color: #FFAE00;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-
-
-
-.star.full {
-  background-color: #FFAE00;
-}
-
-.star.half {
-  background: linear-gradient(to right, #FFAE00 50%, );
-}
-
-.star.empty {
-  background-color: #d3d3d3;
+  font-size: 20px;
+  color: #FFAE00;
+  margin-right: 1px;
 }
 
 .reviews {
-  margin-left: 8px;
+  margin-left: 3px;
   color: gray;
   font-size: 0.9em;
+  margin-top: 3px;
 }
   
 
