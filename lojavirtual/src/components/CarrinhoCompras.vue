@@ -1,51 +1,54 @@
 <template>
- <div class="layout">
+  <div class="layout">
     <div class="contene">
       <div class="retangulo1">
         <h1 class="titulo">Carrinho de Compras</h1>
       </div>
 
       <div class="retangulo2" v-if="carrinho.length > 0">
-    <div v-for="(produto, index) in carrinho" :key="index" class="item-carrinho">
-        <div class="image-wrapper">
+        <div v-for="(produto, index) in carrinho" :key="index" class="item-carrinho">
+          <div class="image-wrapper">
             <img :src="produto.imagemUrl" alt="Product Image" class="image1" />
-        </div>
-        <div class="retangulo22">
+          </div>
+          <div class="retangulo22">
             <h1 class="titulo2">{{ produto.nome }}</h1>
-            <p class="price">{{ produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</p>
-
-        </div>
-        <div class="retangulo222">
+            <p class="price">
+              {{ produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
+            </p>
+          </div>
+          <div class="retangulo222">
             <div class="circle-icon" @click="increaseQuantity(index)">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 plus">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 plus">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
             </div>
-            <div class="quant"> 
-                <p class="quantity">{{ produto.quantidade }}</p> 
+            <div class="quant">
+              <p class="quantity">{{ produto.quantidade }}</p>
             </div>
             <div class="circle-icon" @click="decreaseQuantity(index)">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 minus">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 minus">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
             </div>
-        </div>
-        <div class="sub">
+          </div>
+          <div class="sub">
             <div class="texto-normal">Subtotal</div>
-            <div class="texto-preco"> {{ (produto.preco * produto.quantidade).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</div>
-
+            <div class="texto-preco">
+              {{ (produto.preco * produto.quantidade).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
+            </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
       <div v-else>
         <p class="empty-cart">Seu carrinho está vazio!</p>
       </div>
 
       <div class="total">
-        <h2 class="titulo">Total: <span class="valor-total"> {{ valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</span></h2>
+        <h2 class="titulo">
+          Total: <span class="valor-total">{{ valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</span>
+        </h2>
       </div>
-
     </div>
 
     <div class="down">
@@ -62,43 +65,37 @@
       </p>
       <button class="botao-confirmacao" @click="fecharConfirmacao">Ok</button>
     </div>
-  </div>
 
-  <div v-if="exibirConfirmacaoLimpeza" class="overlay">
-  <div class="container-confirmacao">
-    <h1 class="titulo-de-confirmacao">Aviso!</h1>
-    <div class="linha"></div>
-    <p class="mensagem-confirmacao">
-      Você está prestes a remover todos os itens do carrinho.
-      Você tem certeza que deseja prosseguir?
-    </p>
-    <div class="botao-container"> 
-      <!-- Botão "Não" cancela a limpeza -->
-      <button class="botao-confir-v" @click="cancelarLimpeza">Não</button>
-      <!-- Botão "Sim" confirma a limpeza -->
-      <button class="botao-confir-f" @click="confirmarLimpeza">Sim</button>
+    <div v-if="exibirConfirmacaoLimpeza" class="overlay">
+      <div class="container-confirmacao">
+        <h1 class="titulo-de-confirmacao">Aviso!</h1>
+        <div class="linha"></div>
+        <p class="mensagem-confirmacao">
+          Você está prestes a remover todos os itens do carrinho. Você tem certeza que deseja prosseguir?
+        </p>
+        <div class="botao-container">
+          <button class="botao-confir-v" @click="cancelarLimpeza">Não</button>
+          <button class="botao-confir-f" @click="confirmarLimpeza">Sim</button>
+        </div>
+      </div>
     </div>
+
+    <div v-if="pedidoFinalizado" class="overlay"></div>
   </div>
-</div>
-
-  <div v-if="pedidoFinalizado" class="overlay"></div>
-
 </template>
 
 <script>
-
-
 export default {
-  name: 'CarrinhoCompras',
+  name: "CarrinhoCompras",
   data() {
     return {
       carrinho: [],
       pedidoFinalizado: false,
-      exibirConfirmacaoLimpeza: false
+      exibirConfirmacaoLimpeza: false,
     };
   },
   mounted() {
-    const carrinhoSalvo = localStorage.getItem('carrinho');
+    const carrinhoSalvo = localStorage.getItem("carrinho");
     if (carrinhoSalvo) {
       this.carrinho = JSON.parse(carrinhoSalvo);
     }
@@ -110,52 +107,37 @@ export default {
   },
   methods: {
     voltarParaListagem() {
-      this.$router.push('/');
+      this.$router.push("/");
     },
     limparCarrinho() {
-      this.exibirConfirmacaoLimpeza = true
+      this.exibirConfirmacaoLimpeza = true;
     },
-
     confirmarLimpeza() {
-    this.carrinho = []; 
-    localStorage.removeItem('carrinho'); 
-    this.exibirConfirmacaoLimpeza = false;
-  },
-  cancelarLimpeza() {
-    this.exibirConfirmacaoLimpeza = false; 
-  },
-
+      this.carrinho = [];
+      localStorage.removeItem("carrinho");
+      this.exibirConfirmacaoLimpeza = false;
+    },
+    cancelarLimpeza() {
+      this.exibirConfirmacaoLimpeza = false;
+    },
     finalizarPedido() {
-      this.pedidoFinalizado = true; 
+      this.pedidoFinalizado = true;
     },
     fecharConfirmacao() {
-      this.pedidoFinalizado = false; 
-    },
-    adicionarAoCarrinho(produto) {
-      const produtoExistente = this.carrinho.find(item => item.nome === produto.nome);
-      if (produtoExistente) {
-        produtoExistente.quantidade += 1; 
-      } else {
-        this.carrinho.push({
-          ...produto,
-          quantidade: 1, 
-        });
-      }
-      localStorage.setItem('carrinho', JSON.stringify(this.carrinho)); 
-      produto.adicionado = true; 
+      this.pedidoFinalizado = false;
     },
     increaseQuantity(index) {
       this.carrinho[index].quantidade += 1;
-      localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
+      localStorage.setItem("carrinho", JSON.stringify(this.carrinho));
     },
     decreaseQuantity(index) {
-      if (this.carrinho[index].quantidade > 0) {
+      if (this.carrinho[index].quantidade > 1) {
         this.carrinho[index].quantidade -= 1;
-        localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
+        localStorage.setItem("carrinho", JSON.stringify(this.carrinho));
       }
-    }
+    },
   },
-}
+};
 </script>
 
 
@@ -278,6 +260,8 @@ export default {
     font-size: 20px;
     margin-left: 3%;
 }
+
+
 
 .quantity {
     color: white;

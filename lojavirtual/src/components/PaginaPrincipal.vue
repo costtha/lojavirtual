@@ -14,13 +14,8 @@
           <h1 class="titulo2">Teclado Logitech Silent Touch</h1>
           <div class="product-rating">
             <div class="stars">
-              <!-- Estrelas cheias -->
               <span v-for="star in fullStars" :key="'full-' + star" class="star full">&#9733;</span>
-              
-              <!-- Estrela meia (se necessário) -->
               <span v-if="halfStar" class="star half">&#9733;</span>
-              
-              <!-- Estrelas vazias (garantir que sempre sejam 2 últimas estrelas) -->
               <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty">&#9734;</span>
             </div>
             <span class="reviews">(935 avaliações)</span>
@@ -47,13 +42,8 @@
           <h1 class="titulo3">Placa De Vídeo Gigabyte NVIDIA GeForce RTX 4090 AORUS MASTER, 24GB...</h1>
           <div class="product-rating">
             <div class="stars">
-              <!-- Estrelas cheias -->
               <span v-for="star in fullStars" :key="'full-' + star" class="star full">&#9733;</span>
-              
-              <!-- Estrela meia (se necessário) -->
               <span v-if="halfStar" class="star half">&#9733;</span>
-              
-              <!-- Estrelas vazias (garantir que sempre sejam 2 últimas estrelas) -->
               <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty">&#9734;</span>
             </div>
             <span class="reviews">(128 avaliações)</span>
@@ -80,13 +70,8 @@
           <h1 class="titulo4">Pen Drive 128gb Cruzer Blade - Sandisk</h1>
           <div class="product-rating">
             <div class="stars">
-              <!-- Estrelas cheias -->
               <span v-for="star in fullStars" :key="'full-' + star" class="star full">&#9733;</span>
-              
-              <!-- Estrela meia (se necessário) -->
               <span v-if="halfStar" class="star half">&#9733;</span>
-              
-              <!-- Estrelas vazias (garantir que sempre sejam 2 últimas estrelas) -->
               <span v-for="star in emptyStars" :key="'empty-' + star" class="star empty">&#9734;</span>
             </div>
             <span class="reviews">(128 avaliações)</span>
@@ -108,11 +93,13 @@
     
 
     <div class="down">
-      <button class="bott">Carregar mais produtos</button>
-      <router-link to="/carrinho">
-        <button class="bott1">Ir para o Carrinho</button>
+      <router-link to="/produtos-mais">
+        <button class="bott">Carregar mais produtos</button>
       </router-link>
-    </div>
+    <router-link to="/carrinho">
+      <button class="bott1">Ir para o Carrinho</button>
+    </router-link>
+  </div>
   </div>
 </template>
 
@@ -160,7 +147,7 @@ export default {
       localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
     },
     carregarMaisProdutos() {
-      this.produtosVisiveis += 3; // Adiciona mais produtos visíveis ao clicar
+      this.produtosVisiveis += 3; 
     }
   }
 };
@@ -443,4 +430,3 @@ export default {
   
 
   </style>
-  
